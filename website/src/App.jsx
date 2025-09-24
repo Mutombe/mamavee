@@ -1,23 +1,23 @@
-import React, { useState } from 'react'
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
-import { AnimatePresence, motion } from 'framer-motion'
-import HomePage from './components/homepage'
-import AboutPage from './components/about'
-import ServicesPage from './components/services'
-import PortfolioPage from './components/portfolio'
-import ContactPage from './components/contact'
-import Footer from './components/footer'
-import Navigation from './components/nav'
-import { Toaster } from 'sonner' // Add this import (or wherever Toaster comes from)
+import React, { useState } from "react";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
+import HomePage from "./components/homepage";
+import AboutPage from "./components/about";
+import ServicesPage from "./components/services";
+import PortfolioPage from "./components/portfolio";
+import ContactPage from "./components/contact";
+import Footer from "./components/footer";
+import Navigation from "./components/nav";
+import { Toaster } from "sonner"; // Add this import (or wherever Toaster comes from)
 
 const AnimatedRoutes = () => {
   const location = useLocation();
-  
+
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
-        <Route 
-          path="/" 
+        <Route
+          path="/"
           element={
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -27,10 +27,10 @@ const AnimatedRoutes = () => {
             >
               <HomePage />
             </motion.div>
-          } 
+          }
         />
-        <Route 
-          path="/about" 
+        <Route
+          path="/about"
           element={
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -40,10 +40,10 @@ const AnimatedRoutes = () => {
             >
               <AboutPage />
             </motion.div>
-          } 
+          }
         />
-        <Route 
-          path="/services" 
+        <Route
+          path="/services"
           element={
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -53,10 +53,10 @@ const AnimatedRoutes = () => {
             >
               <ServicesPage />
             </motion.div>
-          } 
+          }
         />
-        <Route 
-          path="/portfolio" 
+        <Route
+          path="/portfolio"
           element={
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -66,10 +66,10 @@ const AnimatedRoutes = () => {
             >
               <PortfolioPage />
             </motion.div>
-          } 
+          }
         />
-        <Route 
-          path="/contact" 
+        <Route
+          path="/contact"
           element={
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -79,7 +79,7 @@ const AnimatedRoutes = () => {
             >
               <ContactPage />
             </motion.div>
-          } 
+          }
         />
       </Routes>
     </AnimatePresence>
@@ -89,7 +89,256 @@ const AnimatedRoutes = () => {
 // Main App Component - now inside the router context
 const App = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gray-100 century-gothic">
+      <style jsx>{`
+        @font-face {
+          font-family: "Gravesend Sans";
+          src: url("./fonts/fonnts.com-Gravesend_Sans_Light.otf")
+            format("opentype");
+          font-weight: 300;
+          font-style: normal;
+          font-display: swap;
+        }
+
+        @font-face {
+          font-family: "Gravesend Sans";
+          src: url("./fonts/fonnts.com-Gravesend_Sans_Medium.otf")
+            format("opentype");
+          font-weight: 500;
+          font-style: normal;
+          font-display: swap;
+        }
+
+        @font-face {
+          font-family: "Gravesend Sans";
+          src: url("./fonts/fonnts.com-Gravesend_Sans_Bold.otf")
+            format("opentype");
+          font-weight: 700;
+          font-style: normal;
+          font-display: swap;
+        }
+
+        /* Century Gothic Font Face */
+        @font-face {
+          font-family: "Century Gothic Custom";
+          src: url("./fonts/weezerfont.ttf") format("truetype");
+          font-weight: normal;
+          font-style: normal;
+          font-display: swap;
+        }
+
+        @font-face {
+          font-family: "Gellix";
+          src: url("./fonts/Gellix-Light.ttf") format("truetype");
+          font-weight: normal;
+          font-style: normal;
+          font-display: swap;
+        }
+        @font-face {
+          font-family: "Gellix";
+          src: url("./fonts/Gellix-Regular.ttf") format("truetype");
+          font-weight: normal;
+          font-style: normal;
+          font-display: swap;
+        }
+
+        /* GravitaHUM Font Face */
+        @font-face {
+          font-family: "GravitaHUM";
+          src: url("./fonts/gravita/GravitaHUM-Thin-BF657928839dbb0.otf")
+            format("opentype");
+          font-weight: 100;
+          font-style: normal;
+          font-display: swap;
+        }
+
+        @font-face {
+          font-family: "GravitaHUM";
+          src: url("./fonts/gravita/GravitaHUMItalic-Thin-BF657928846675fc.otf")
+            format("opentype");
+          font-weight: 100;
+          font-style: italic;
+          font-display: swap;
+        }
+
+        @font-face {
+          font-family: "GravitaHUM";
+          src: url("/fonts/gravita/GravitaHUM-ExtraLight-BF657928834054d.otf")
+            format("opentype");
+          font-weight: 200;
+          font-style: normal;
+          font-display: swap;
+        }
+
+        @font-face {
+          font-family: "GravitaHUM";
+          src: url("/fonts/gravita/GravitaHUMItalic-ExtraLight-BF657928845454584.otf")
+            format("opentype");
+          font-weight: 200;
+          font-style: italic;
+          font-display: swap;
+        }
+
+        @font-face {
+          font-family: "GravitaHUM";
+          src: url("/fonts/gravita/GravitaHUM-Light-BF657928883617e7.otf")
+            format("opentype");
+          font-weight: 300;
+          font-style: normal;
+          font-display: swap;
+        }
+
+        @font-face {
+          font-family: "GravitaHUM";
+          src: url("/fonts/gravita/GravitaHUMItalic-Light-BF657928843d22e.otf")
+            format("opentype");
+          font-weight: 300;
+          font-style: italic;
+          font-display: swap;
+        }
+
+        @font-face {
+          font-family: "GravitaHUM";
+          src: url("/fonts/gravita/GravitaHUM-Regular-BF657928883558f8b.otf")
+            format("opentype");
+          font-weight: 400;
+          font-style: normal;
+          font-display: swap;
+        }
+
+        @font-face {
+          font-family: "GravitaHUM";
+          src: url("/fonts/gravita/GravitaHUMItalic-Regular-BF657928883913da.otf")
+            format("opentype");
+          font-weight: 400;
+          font-style: italic;
+          font-display: swap;
+        }
+
+        @font-face {
+          font-family: "GravitaHUM";
+          src: url("/fonts/gravita/GravitaHUM-Medium-BF657928826638d1.otf")
+            format("opentype");
+          font-weight: 500;
+          font-style: normal;
+          font-display: swap;
+        }
+
+        @font-face {
+          font-family: "GravitaHUM";
+          src: url("/fonts/gravita/GravitaHUMItalic-Medium-BF657928845f94f.otf")
+            format("opentype");
+          font-weight: 500;
+          font-style: italic;
+          font-display: swap;
+        }
+
+        @font-face {
+          font-family: "GravitaHUM";
+          src: url("/fonts/gravita/GravitaHUM-Bold-BF657928881d425d.otf")
+            format("opentype");
+          font-weight: 700;
+          font-style: normal;
+          font-display: swap;
+        }
+
+        @font-face {
+          font-family: "GravitaHUM";
+          src: url("/fonts/gravita/GravitaHUMItalic-Bold-BF657928845732a.otf")
+            format("opentype");
+          font-weight: 700;
+          font-style: italic;
+          font-display: swap;
+        }
+
+        @font-face {
+          font-family: "GravitaHUM";
+          src: url("/fonts/gravita/GravitaHUM-ExtraBold-BF657928822e711f.otf")
+            format("opentype");
+          font-weight: 800;
+          font-style: normal;
+          font-display: swap;
+        }
+
+        @font-face {
+          font-family: "GravitaHUM";
+          src: url("/fonts/gravita/GravitaHUMItalic-ExtraBold-BF657928845bee6.otf")
+            format("opentype");
+          font-weight: 800;
+          font-style: italic;
+          font-display: swap;
+        }
+
+        @font-face {
+          font-family: "GravitaHUM";
+          src: url("/fonts/gravita/GravitaHUM-Black-BF657928175673.otf")
+            format("opentype");
+          font-weight: 900;
+          font-style: normal;
+          font-display: swap;
+        }
+
+        @font-face {
+          font-family: "GravitaHUM";
+          src: url("/fonts/gravita/GravitaHUMItalic-Black-BF657928846664bc.otf")
+            format("opentype");
+          font-weight: 900;
+          font-style: italic;
+          font-display: swap;
+        }
+
+        @font-face {
+          font-family: "GravitaHUM";
+          src: url("/fonts/gravita/GravitaHUM-Hairline-BF657928833ebb5f.otf")
+            format("opentype");
+          font-weight: 100;
+          font-style: normal;
+          font-display: swap;
+        }
+
+        @font-face {
+          font-family: "GravitaHUM";
+          src: url("/fonts/gravita/GravitaHUMItalic-Hairline-BF657928847167f.otf")
+            format("opentype");
+          font-weight: 100;
+          font-style: italic;
+          font-display: swap;
+        }
+        /* Font utility classes */
+        .gravesend-sans {
+          font-family: "Gravesend Sans", "Inter", "Segoe UI", Tahoma, Geneva,
+            Verdana, sans-serif;
+        }
+
+        .roboto-font {
+          font-family: "Roboto", "Inter", "Segoe UI", Tahoma, Geneva, Verdana,
+            sans-serif;
+        }
+
+        .century-gothic {
+          font-family: "Century Gothic Custom", "Century Gothic", "Arial",
+            sans-serif;
+        }
+
+        .gellix-font {
+          font-family: "Gellix", "Inter", "Segoe UI", Tahoma, Geneva, Verdana,
+            sans-serif;
+        }
+
+        .gravita-font {
+          font-family: "GravitaHUM", "Inter", "Segoe UI", Tahoma, Geneva,
+            Verdana, sans-serif;
+        }
+
+        body {
+          overflow-x: hidden;
+        }
+
+        /* Smooth scrolling */
+        html {
+          scroll-behavior: smooth;
+        }
+      `}</style>
       <Navigation />
       <AnimatedRoutes />
       <Footer />

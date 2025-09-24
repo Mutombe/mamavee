@@ -35,6 +35,70 @@ const colors = {
   darkBrown: '#311F1F'
 };
 
+const FloatingElements = () => {
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {/* Animated blobs */}
+      <motion.div
+        className="absolute top-10 right-10 w-32 h-32 bg-gradient-to-r from-orange-400/20 to-amber-400/20 rounded-full blur-3xl"
+        animate={{
+          x: [0, 50, 0],
+          y: [0, -30, 0],
+          scale: [1, 1.2, 1],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
+      <motion.div
+        className="absolute bottom-20 left-10 w-24 h-24 bg-gradient-to-r from-teal-400/20 to-cyan-400/20 rounded-full blur-2xl"
+        animate={{
+          x: [0, -40, 0],
+          y: [0, 40, 0],
+          scale: [1, 0.8, 1],
+        }}
+        transition={{
+          duration: 6,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 1
+        }}
+      />
+      <motion.div
+        className="absolute top-1/3 left-1/4 w-16 h-16 bg-gradient-to-r from-purple-400/20 to-pink-400/20 rounded-full blur-2xl"
+        animate={{
+          rotate: [0, 360],
+          scale: [1, 1.5, 1],
+        }}
+        transition={{
+          duration: 10,
+          repeat: Infinity,
+          ease: "linear"
+        }}
+      />
+    </div>
+  );
+};
+
+const GlassCard = ({ children, className = "", delay = 0 }) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 50, scale: 0.95 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{ duration: 0.6, delay }}
+      className={`relative backdrop-blur-xl bg-white/10 border border-white/20 rounded-3xl shadow-2xl hover:shadow-3xl transition-all duration-500 group ${className}`}
+    >
+      {/* Glass shine effect */}
+      <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+      {/* Content */}
+      <div className="relative z-10">{children}</div>
+    </motion.div>
+  );
+};
+
+
 const ContactPage = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -57,19 +121,21 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="min-h-screen pt-20">
-      {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-blue-50 to-orange-50">
+    <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+      <FloatingElements />
+      
+      {/* Mobile-First Hero Section */}
+      <section className="relative py-20 sm:py-32 pt-24 sm:pt-32">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-5xl font-bold mb-6" style={{ color: colors.darkTeal }}>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
               Let's Create Together
             </h1>
-            <p className="text-xl text-gray-600 leading-relaxed">
+            <p className="text-lg sm:text-xl text-gray-300 leading-relaxed">
               Ready to transform your brand message into viral comedy content? 
               Let's discuss your vision and make it happen.
             </p>
@@ -77,21 +143,17 @@ const ContactPage = () => {
         </div>
       </section>
 
-      <section className="py-20">
+      <section className="relative py-16 sm:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16">
-            {/* Contact Form */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              <h2 className="text-3xl font-bold mb-8" style={{ color: colors.darkTeal }}>
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16">
+            {/* Mobile-First Contact Form */}
+            <GlassCard className="p-6 sm:p-8 order-2 lg:order-1">
+              <h2 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-white">
                 Send Me a Message
               </h2>
-              <div className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
                     Name *
                   </label>
                   <input
@@ -100,12 +162,12 @@ const ContactPage = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                    className="w-full px-4 py-3 sm:py-4 backdrop-blur-xl bg-white/10 border border-white/20 rounded-xl sm:rounded-2xl focus:ring-2 focus:ring-orange-500 focus:border-transparent text-white placeholder-gray-400 text-base"
                     placeholder="Your full name"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
                     Email *
                   </label>
                   <input
@@ -114,12 +176,12 @@ const ContactPage = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                    className="w-full px-4 py-3 sm:py-4 backdrop-blur-xl bg-white/10 border border-white/20 rounded-xl sm:rounded-2xl focus:ring-2 focus:ring-orange-500 focus:border-transparent text-white placeholder-gray-400 text-base"
                     placeholder="your.email@company.com"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
                     Company
                   </label>
                   <input
@@ -127,12 +189,12 @@ const ContactPage = () => {
                     name="company"
                     value={formData.company}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                    className="w-full px-4 py-3 sm:py-4 backdrop-blur-xl bg-white/10 border border-white/20 rounded-xl sm:rounded-2xl focus:ring-2 focus:ring-orange-500 focus:border-transparent text-white placeholder-gray-400 text-base"
                     placeholder="Your company name"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
                     Message *
                   </label>
                   <textarea
@@ -140,100 +202,91 @@ const ContactPage = () => {
                     value={formData.message}
                     onChange={handleChange}
                     required
-                    rows={6}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                    rows={5}
+                    className="w-full px-4 py-3 sm:py-4 backdrop-blur-xl bg-white/10 border border-white/20 rounded-xl sm:rounded-2xl focus:ring-2 focus:ring-orange-500 focus:border-transparent text-white placeholder-gray-400 resize-none text-base"
                     placeholder="Tell me about your project, goals, and how I can help..."
                   />
                 </div>
                 <button
-                  onClick={handleSubmit}
-                  className="w-full px-8 py-4 bg-orange-500 text-white font-semibold rounded-lg hover:bg-orange-600 transition-colors duration-200"
+                  type="submit"
+                  className="w-full px-6 sm:px-8 py-4 bg-gradient-to-r from-orange-500 to-amber-500 text-white font-semibold rounded-xl sm:rounded-2xl hover:shadow-2xl hover:scale-105 transition-all duration-300 text-base sm:text-lg"
                 >
                   Send Message
                 </button>
-              </div>
-            </motion.div>
+              </form>
+            </GlassCard>
 
-            {/* Contact Info */}
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="space-y-8"
-            >
-              <div>
-                <h2 className="text-3xl font-bold mb-8" style={{ color: colors.darkTeal }}>
+            {/* Mobile-First Contact Info */}
+            <div className="space-y-6 sm:space-y-8 order-1 lg:order-2">
+              <GlassCard className="p-6 sm:p-8">
+                <h2 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-white">
                   Get in Touch
                 </h2>
-                <div className="space-y-6">
+                <div className="space-y-4 sm:space-y-6">
                   <div className="flex items-center">
-                    <Mail className="text-orange-500 mr-4" size={24} />
-                    <div>
-                      <p className="font-medium">Email</p>
-                      <p className="text-gray-600">hello@mamavee.zw</p>
+                    <div className="w-12 h-12 rounded-xl sm:rounded-2xl bg-gradient-to-r from-orange-500 to-amber-500 flex items-center justify-center mr-4 flex-shrink-0">
+                      <Mail className="text-white" size={24} />
+                    </div>
+                    <div className="min-w-0">
+                      <p className="font-medium text-white">Email</p>
+                      <p className="text-gray-300 truncate">hello@mamavee.zw</p>
                     </div>
                   </div>
                   <div className="flex items-center">
-                    <Users className="text-orange-500 mr-4" size={24} />
+                    <div className="w-12 h-12 rounded-xl sm:rounded-2xl bg-gradient-to-r from-teal-500 to-cyan-500 flex items-center justify-center mr-4 flex-shrink-0">
+                      <Users className="text-white" size={24} />
+                    </div>
                     <div>
-                      <p className="font-medium">Response Time</p>
-                      <p className="text-gray-600">Within 24 hours</p>
+                      <p className="font-medium text-white">Response Time</p>
+                      <p className="text-gray-300">Within 24 hours</p>
                     </div>
                   </div>
                 </div>
-              </div>
+              </GlassCard>
 
-              {/* Social Media */}
-              <div>
-                <h3 className="text-xl font-bold mb-4" style={{ color: colors.darkTeal }}>
+              {/* Mobile-First Social Media */}
+              <GlassCard className="p-6 sm:p-8">
+                <h3 className="text-xl font-bold mb-4 sm:mb-6 text-white">
                   Follow My Journey
                 </h3>
-                <div className="flex space-x-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                   {[
-                    { icon: Instagram, label: '@mamavee_zw' },
-                    { icon: Facebook, label: 'Mama Vee Comedy' },
-                    { icon: Youtube, label: 'Mama Vee' },
-                    { icon: Twitter, label: '@mamavee_zw' }
-                  ].map(({ icon: Icon, label }) => (
+                    { icon: Instagram, label: '@mamavee_zw', gradient: 'from-pink-500 to-purple-500' },
+                    { icon: Facebook, label: 'Mama Vee Comedy', gradient: 'from-blue-500 to-indigo-500' },
+                    { icon: Youtube, label: 'Mama Vee', gradient: 'from-red-500 to-pink-500' },
+                    { icon: Twitter, label: '@mamavee_zw', gradient: 'from-sky-500 to-blue-500' }
+                  ].map(({ icon: Icon, label, gradient }) => (
                     <button
                       key={label}
-                      className="p-3 rounded-full hover:bg-orange-100 transition-colors duration-200"
-                      style={{ color: colors.mediumTeal }}
+                      className={`flex items-center p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-gradient-to-r ${gradient} text-white hover:scale-105 transition-transform duration-300`}
                     >
-                      <Icon size={24} />
+                      <Icon size={20} className="mr-2 sm:mr-3 flex-shrink-0" />
+                      <span className="text-sm font-medium truncate">{label}</span>
                     </button>
                   ))}
                 </div>
-              </div>
+              </GlassCard>
 
-              {/* Quick Stats */}
-              <div 
-                className="p-8 rounded-2xl"
-                style={{ backgroundColor: colors.lightBeige }}
-              >
-                <h3 className="text-xl font-bold mb-4" style={{ color: colors.darkTeal }}>
+              {/* Mobile-First Quick Stats */}
+              <GlassCard className="p-6 sm:p-8">
+                <h3 className="text-xl font-bold mb-4 sm:mb-6 text-white">
                   Why Work With Me?
                 </h3>
-                <div className="space-y-4">
-                  <div className="flex justify-between">
-                    <span>Total Followers</span>
-                    <span className="font-bold text-orange-500">90K+</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Average Engagement</span>
-                    <span className="font-bold text-green-500">15%</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Brand Partnerships</span>
-                    <span className="font-bold text-blue-500">10+</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Content Reach</span>
-                    <span className="font-bold text-purple-500">1M+ Views</span>
-                  </div>
+                <div className="space-y-3 sm:space-y-4">
+                  {[
+                    { label: "Total Followers", value: "90K+", color: "text-orange-400" },
+                    { label: "Average Engagement", value: "15%", color: "text-green-400" },
+                    { label: "Brand Partnerships", value: "10+", color: "text-blue-400" },
+                    { label: "Content Reach", value: "1M+ Views", color: "text-purple-400" }
+                  ].map(({ label, value, color }) => (
+                    <div key={label} className="flex justify-between items-center">
+                      <span className="text-gray-300 text-sm sm:text-base">{label}</span>
+                      <span className={`font-bold ${color} text-sm sm:text-base`}>{value}</span>
+                    </div>
+                  ))}
                 </div>
-              </div>
-            </motion.div>
+              </GlassCard>
+            </div>
           </div>
         </div>
       </section>
