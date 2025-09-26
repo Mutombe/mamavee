@@ -108,10 +108,10 @@ const GlassCard = ({ children, className = "", delay = 0 }) => {
 
 const AboutPage = () => {
   const achievements = [
-    { number: '90K+', label: 'Followers', sublabel: 'Across all platforms' },
+    { number: '1M+', label: 'Followers', sublabel: 'Across all platforms' },
     { number: '1M+', label: 'Total Views', sublabel: 'And counting' },
     { number: '10+', label: 'Brand Partners', sublabel: 'Successful campaigns' },
-    { number: '3+', label: 'Years Creating', sublabel: 'Comedy content' }
+    { number: '6+', label: 'Years Creating', sublabel: 'Comedy content' }
   ];
 
   const journey = [

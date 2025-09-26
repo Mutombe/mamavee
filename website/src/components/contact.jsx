@@ -274,7 +274,7 @@ const ContactPage = () => {
                 </h3>
                 <div className="space-y-3 sm:space-y-4">
                   {[
-                    { label: "Total Followers", value: "90K+", color: "text-orange-400" },
+                    { label: "Total Followers", value: "1M+", color: "text-orange-400" },
                     { label: "Average Engagement", value: "15%", color: "text-green-400" },
                     { label: "Brand Partnerships", value: "10+", color: "text-blue-400" },
                     { label: "Content Reach", value: "1M+ Views", color: "text-purple-400" }

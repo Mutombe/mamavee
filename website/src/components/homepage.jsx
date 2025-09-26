@@ -121,9 +121,9 @@ const GlassCard = ({ children, className = "", delay = 0 }) => {
 // Enhanced Home Page Component
 const HomePage = () => {
   const stats = [
-    { icon: IoIosPeople, value: '90K+', label: 'Followers', color: 'from-blue-400 to-cyan-400' },
+    { icon: IoIosPeople, value: '1M+', label: 'Followers', color: 'from-blue-400 to-cyan-400' },
     { icon: LuView, value: '1M+', label: 'Views', color: 'from-purple-400 to-pink-400' },
-    { icon: SlLike, value: '500K+', label: 'Likes', color: 'from-red-400 to-rose-400' },
+    { icon: SlLike, value: '650K+', label: 'Likes', color: 'from-red-400 to-rose-400' },
     { icon: TbBrandAbstract, value: '10+', label: 'Brand Partners', color: 'from-yellow-400 to-orange-400' }
   ];
 

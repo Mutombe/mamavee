@@ -238,7 +238,7 @@ const ServicesPage = () => {
                   LET'S
                 </span>
               </h1>
-              <h1 className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black leading-none">
+              <h1 className="text-5xl xs:text-6xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black leading-none">
                 <span
                   className="bg-clip-text text-transparent block"
                   style={{
@@ -276,7 +276,7 @@ const ServicesPage = () => {
               <div className="grid grid-cols-1 xs:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 text-center max-w-2xl mx-auto">
                 <div className="bg-gray-800/30 backdrop-blur-sm rounded-lg p-3 sm:p-4 border border-gray-700/50">
                   <div className="text-2xl sm:text-3xl font-bold text-orange-400">
-                    90K+
+                    1M+
                   </div>
                   <div className="text-gray-400 text-xs sm:text-sm mt-1">
                     Followers Reached
