@@ -31,8 +31,14 @@ import {
   Award
 } from 'lucide-react';
 import { toast, Toaster } from 'sonner';
-// Floating Elements Component
-
+import { IoIosPeople } from "react-icons/io";
+import { LuView } from "react-icons/lu";
+import { HiDocumentChartBar } from "react-icons/hi2";
+import { SlLike } from "react-icons/sl";
+import { BsHearts } from "react-icons/bs";
+import { FaFaceGrinHearts } from "react-icons/fa6";
+import { LuChartNoAxesCombined } from "react-icons/lu";
+import { TbBrandAbstract } from "react-icons/tb";
 
 const colors = {
   darkTeal: '#122D39',
@@ -115,21 +121,21 @@ const GlassCard = ({ children, className = "", delay = 0 }) => {
 // Enhanced Home Page Component
 const HomePage = () => {
   const stats = [
-    { icon: Users, value: '90K+', label: 'Followers', color: 'from-blue-400 to-cyan-400' },
-    { icon: Eye, value: '1M+', label: 'Views', color: 'from-purple-400 to-pink-400' },
-    { icon: Heart, value: '500K+', label: 'Likes', color: 'from-red-400 to-rose-400' },
-    { icon: Star, value: '10+', label: 'Brand Partners', color: 'from-yellow-400 to-orange-400' }
+    { icon: IoIosPeople, value: '90K+', label: 'Followers', color: 'from-blue-400 to-cyan-400' },
+    { icon: LuView, value: '1M+', label: 'Views', color: 'from-purple-400 to-pink-400' },
+    { icon: SlLike, value: '500K+', label: 'Likes', color: 'from-red-400 to-rose-400' },
+    { icon: TbBrandAbstract, value: '10+', label: 'Brand Partners', color: 'from-yellow-400 to-orange-400' }
   ];
 
   const features = [
     {
-      icon: Heart,
+      icon: FaFaceGrinHearts,
       title: "Authentic Connection",
       description: "Every skit comes from genuine experiences, creating real bonds with audiences.",
       gradient: "from-red-500 to-pink-500"
     },
     {
-      icon: TrendingUp,
+      icon: LuChartNoAxesCombined,
       title: "Viral Potential",
       description: "Strategic humor that naturally encourages sharing and engagement.",
       gradient: "from-green-500 to-emerald-500"
@@ -141,7 +147,7 @@ const HomePage = () => {
       gradient: "from-blue-500 to-cyan-500"
     },
     {
-      icon: Award,
+      icon: HiDocumentChartBar,
       title: "Proven Results",
       description: "Consistent track record of successful campaigns and satisfied brand partners.",
       gradient: "from-yellow-500 to-orange-500"
@@ -180,7 +186,7 @@ const HomePage = () => {
       </div>
 
       {/* Hero Section with Curved Design */}
-      <section className="relative min-h-screen flex items-center pt-26">
+      <section className="relative min-h-screen flex items-center pt-30">
         <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 via-transparent to-teal-500/10"></div>
         
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">

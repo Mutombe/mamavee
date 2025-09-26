@@ -107,117 +107,330 @@ const GlassCard = ({ children, className = "", delay = 0 }) => {
 
 
 const AboutPage = () => {
+  const achievements = [
+    { number: '90K+', label: 'Followers', sublabel: 'Across all platforms' },
+    { number: '1M+', label: 'Total Views', sublabel: 'And counting' },
+    { number: '10+', label: 'Brand Partners', sublabel: 'Successful campaigns' },
+    { number: '3+', label: 'Years Creating', sublabel: 'Comedy content' }
+  ];
+
+  const journey = [
+    {
+      year: '2021',
+      title: 'The Beginning',
+      description: 'Started creating comedy skits with friends',
+      icon: '🌱'
+    },
+    {
+      year: '2022', 
+      title: 'Going Viral',
+      description: 'First viral video hits 100K+ views',
+      icon: '🚀'
+    },
+    {
+      year: '2023',
+      title: 'Brand Partnerships',
+      description: 'Collaborating with major Zimbabwean brands',
+      icon: '🤝'
+    },
+    {
+      year: '2024',
+      title: 'Comedy Empire',
+      description: '90K followers and 1M+ total views achieved',
+      icon: '👑'
+    }
+  ];
+
+  const skills = [
+    { skill: 'Content Creation', level: 95 },
+    { skill: 'Brand Integration', level: 90 },
+    { skill: 'Social Media Marketing', level: 88 },
+    { skill: 'Storytelling', level: 92 },
+    { skill: 'Audience Engagement', level: 96 }
+  ];
+
+  const personalFacts = [
+    { icon: '🏠', label: 'Based in', value: 'Harare, Zimbabwe' },
+    { icon: '🎬', label: 'Content Style', value: 'Authentic Comedy' },
+    { icon: '🌍', label: 'Languages', value: 'English & Shona' },
+    { icon: '🎯', label: 'Mission', value: 'Spreading Joy Through Humor' }
+  ];
+
   return (
     <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
       <FloatingElements />
       
-      <section className="relative py-20 sm:py-32 pt-24 sm:pt-32">
+      {/* Hero Section - Large Impact */}
+      <section className="relative py-20 sm:py-32 pt-30 sm:pt-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div className="text-center mb-16">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="mb-8"
+            >
+              <span className="inline-block px-4 py-2 rounded-full bg-orange-500/20 text-orange-300 text-sm font-medium mb-6">
+                🎭 Comedy Creator & Brand Partner
+              </span>
+              <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-orange-300 to-amber-400 bg-clip-text text-transparent">
+                Behind the Laughs
+              </h1>
+              <p className="text-xl sm:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                Creating authentic comedy that connects brands with hearts across Zimbabwe and beyond
+              </p>
+            </motion.div>
+
+            {/* Main Profile Card */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, delay: 0.3 }}
+              className="relative max-w-md mx-auto"
+            >
+              <GlassCard className="p-8">
+                <div className="aspect-square rounded-3xl overflow-hidden shadow-2xl mb-6">
+                  <div 
+                    className="w-full h-full flex items-center justify-center text-white"
+                    style={{ background: colors.gradients.primary }}
+                  >
+                    <img src="/mama-vee.jpg" alt="Profile" className="w-full h-full object-cover" />
+                  </div>
+                </div>
+                <div className="flex justify-center space-x-4">
+                  {[Instagram, Youtube, Facebook, Twitter].map((Icon, index) => (
+                    <motion.button
+                      key={index}
+                      whileHover={{ scale: 1.2, rotate: 5 }}
+                      whileTap={{ scale: 0.9 }}
+                      className="p-3 rounded-xl bg-white/10 hover:bg-orange-500/20 transition-colors duration-300"
+                    >
+                      <Icon size={20} className="text-white/80" />
+                    </motion.button>
+                  ))}
+                </div>
+              </GlassCard>
+            </motion.div>
+          </div>
+
+          {/* Achievement Stats */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+            {achievements.map((achievement, index) => (
+              <motion.div
+                key={achievement.label}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+              >
+                <GlassCard className="p-6 text-center hover:scale-105">
+                  <div className="text-3xl sm:text-4xl font-bold text-orange-400 mb-2">
+                    {achievement.number}
+                  </div>
+                  <div className="text-white font-semibold mb-1">{achievement.label}</div>
+                  <div className="text-gray-400 text-sm">{achievement.sublabel}</div>
+                </GlassCard>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* My Story - Timeline */}
+      <section className="relative py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl sm:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+              🚀 My Comedy Journey
+            </h2>
+            <p className="text-xl text-gray-400">From casual skits to brand partnerships</p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {journey.map((step, index) => (
+              <motion.div
+                key={step.year}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+              >
+                <GlassCard className="p-6 text-center hover:scale-105 h-full">
+                  <div className="text-4xl mb-4">{step.icon}</div>
+                  <div className="text-orange-400 font-bold text-lg mb-2">{step.year}</div>
+                  <h3 className="text-white font-bold text-lg mb-3">{step.title}</h3>
+                  <p className="text-gray-300 text-sm">{step.description}</p>
+                </GlassCard>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Skills & Expertise */}
+      <section className="relative py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
+              whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
-              className="text-center lg:text-left"
             >
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 lg:mb-8 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                Meet Mama Vee
-              </h1>
-              <div className="space-y-4 sm:space-y-6 text-base sm:text-lg text-gray-300">
-                <p>
-                  Born and raised in Zimbabwe, I discovered my passion for comedy as a way to 
-                  bring joy to people's lives during challenging times. What started as casual 
-                  skits among friends has evolved into a powerful platform for authentic storytelling.
-                </p>
-                <p>
-                  With over 90,000 followers across all social media platforms and more than 
-                  a million views, I've built a community that values genuine humor and 
-                  meaningful connections. My content isn't just about getting laughs—it's 
-                  about creating moments that people remember and share.
-                </p>
-                <p>
-                  As a brand ambassador for companies in travel, hospitality, and various 
-                  other industries, I've developed a unique approach to influencer marketing 
-                  that prioritizes authenticity over everything else.
-                </p>
+              <h2 className="text-4xl font-bold mb-8 bg-gradient-to-r from-orange-400 to-amber-400 bg-clip-text text-transparent">
+                💪 What I Bring to the Table
+              </h2>
+              <div className="space-y-6">
+                {skills.map((skill, index) => (
+                  <motion.div
+                    key={skill.skill}
+                    initial={{ opacity: 0, x: -30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                  >
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-white font-medium">{skill.skill}</span>
+                      <span className="text-orange-400 font-bold">{skill.level}%</span>
+                    </div>
+                    <div className="w-full bg-white/10 rounded-full h-2">
+                      <motion.div
+                        className="bg-gradient-to-r from-orange-500 to-amber-500 h-2 rounded-full"
+                        initial={{ width: 0 }}
+                        whileInView={{ width: `${skill.level}%` }}
+                        transition={{ duration: 1, delay: index * 0.2 }}
+                      />
+                    </div>
+                  </motion.div>
+                ))}
               </div>
             </motion.div>
 
             <motion.div
               initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative mt-8 lg:mt-0"
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              className="space-y-6"
             >
-              <GlassCard className="p-4 sm:p-8">
-                <div className="aspect-[4/5] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl max-w-sm mx-auto lg:max-w-none">
-                  <div 
-                    className="w-full h-full flex items-center justify-center text-white text-4xl font-bold"
-                    style={{ background: colors.gradients.primary }}
-                  >
-                    <div className="text-center">
-                      <User size={80} className="sm:w-[120px] sm:h-[120px] mx-auto mb-4 sm:mb-6" />
-                      <p className="text-2xl sm:text-3xl">Mama Vee</p>
-                      <p className="text-lg sm:text-xl opacity-80">Comedy Creator</p>
+              <GlassCard className="p-8">
+                <h3 className="text-2xl font-bold text-white mb-6">🎯 Quick Facts</h3>
+                <div className="space-y-4">
+                  {personalFacts.map((fact, index) => (
+                    <div key={fact.label} className="flex items-center space-x-4">
+                      <span className="text-2xl">{fact.icon}</span>
+                      <div>
+                        <div className="text-gray-400 text-sm">{fact.label}</div>
+                        <div className="text-white font-semibold">{fact.value}</div>
+                      </div>
                     </div>
-                  </div>
+                  ))}
                 </div>
+              </GlassCard>
+
+              <GlassCard className="p-8">
+                <h3 className="text-xl font-bold text-orange-400 mb-4">🏆 Recent Achievement</h3>
+                <p className="text-gray-300">
+                  <strong>Top Comedy Creator 2024</strong> - Recognized by Zimbabwe Digital Marketing Awards 
+                  for authentic brand storytelling and audience engagement.
+                </p>
               </GlassCard>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Mobile-First Philosophy Section */}
-      <section className="relative py-16 sm:py-20">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <GlassCard className="p-6 sm:p-12 text-center">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-6 sm:mb-8 bg-gradient-to-r from-orange-400 to-amber-400 bg-clip-text text-transparent">
-              My Creative Philosophy
+      {/* Philosophy - Reimagined */}
+      <section className="relative py-20">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl sm:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+              🎭 My Creative Philosophy
             </h2>
-            <div className="space-y-6 sm:space-y-8 text-base sm:text-lg text-gray-300">
-              <p className="italic text-xl sm:text-2xl text-orange-300">
-                "Comedy is the universal language that breaks down barriers and builds bridges."
-              </p>
-              <p>
-                I believe that humor has the power to transform how people perceive brands and messages. 
-                When you make someone laugh, you create a positive association that lasts far beyond 
-                the moment of entertainment.
-              </p>
-              <p>
-                My approach combines traditional Zimbabwean storytelling with modern social media 
-                dynamics. Every piece of content I create is rooted in authentic experiences, 
-                ensuring that audiences connect not just with the humor, but with the human 
-                behind it.
-              </p>
-              <p>
-                For brands, this means their message doesn't just get seen—it gets felt, 
-                remembered, and shared organically because it's wrapped in genuine entertainment.
-              </p>
-            </div>
-          </GlassCard>
+          </motion.div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                icon: '❤️',
+                title: 'Authentic Connection',
+                description: 'Every laugh comes from real experiences and genuine emotions.'
+              },
+              {
+                icon: '🌉',
+                title: 'Building Bridges',
+                description: 'Comedy breaks down barriers between brands and audiences.'
+              },
+              {
+                icon: '✨',
+                title: 'Memorable Impact',
+                description: 'Creating moments that stick long after the laughter fades.'
+              }
+            ].map((philosophy, index) => (
+              <motion.div
+                key={philosophy.title}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+              >
+                <GlassCard className="p-8 text-center hover:scale-105 h-full">
+                  <div className="text-5xl mb-6">{philosophy.icon}</div>
+                  <h3 className="text-xl font-bold text-white mb-4">{philosophy.title}</h3>
+                  <p className="text-gray-300">{philosophy.description}</p>
+                </GlassCard>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Quote Card */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="mt-16"
+          >
+            <GlassCard className="p-12 text-center">
+              <Quote className="text-orange-400 mx-auto mb-6" size={48} />
+              <blockquote className="text-2xl sm:text-3xl font-bold text-white mb-6 italic">
+                "Comedy is the universal language that breaks down barriers and builds bridges between hearts."
+              </blockquote>
+              <div className="text-orange-400 font-semibold">— Mama Vee</div>
+            </GlassCard>
+          </motion.div>
         </div>
       </section>
 
-      {/* Mobile-First Values Section */}
-      <section className="relative py-16 sm:py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12 sm:mb-16 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-            Core Values
-          </h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-            {[
-              { title: "Authenticity", description: "Every piece of content reflects genuine experiences and emotions" },
-              { title: "Respect", description: "Humor that uplifts rather than tears down, respecting all communities" },
-              { title: "Quality", description: "Consistent high-standard content that serves both entertainment and brand goals" },
-              { title: "Innovation", description: "Constantly evolving content styles to stay fresh and engaging" }
-            ].map((value, index) => (
-              <GlassCard key={value.title} delay={index * 0.1} className="p-6 text-center hover:scale-105">
-                <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-white">{value.title}</h3>
-                <p className="text-gray-300 text-sm sm:text-base">{value.description}</p>
-              </GlassCard>
-            ))}
-          </div>
+      {/* Call to Action */}
+      <section className="relative py-20">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <GlassCard className="p-12">
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
+              🚀 Ready to Create Something Amazing?
+            </h2>
+            <p className="text-xl text-gray-300 mb-8">
+              Let's turn your brand story into viral comedy content that resonates with audiences across Zimbabwe and beyond.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                to="/services"
+                className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-orange-500 to-amber-500 text-white font-semibold rounded-2xl hover:scale-105 transition-all duration-300"
+              >
+                🤝 Let's Collaborate
+                <ArrowRight className="ml-2" size={20} />
+              </Link>
+              <Link
+                to="/portfolio"
+                className="inline-flex items-center px-8 py-4 backdrop-blur-xl bg-white/10 border border-white/20 text-white font-semibold rounded-2xl hover:bg-white/20 transition-all duration-300"
+              >
+                🏆 See My Greatest Hits
+              </Link>
+            </div>
+          </GlassCard>
         </div>
       </section>
     </div>

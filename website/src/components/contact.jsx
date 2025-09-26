@@ -125,7 +125,7 @@ const ContactPage = () => {
       <FloatingElements />
       
       {/* Mobile-First Hero Section */}
-      <section className="relative py-20 sm:py-32 pt-24 sm:pt-32">
+      <section className="relative py-20 sm:py-32 pt-30 sm:pt-32">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 50 }}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import HomePage from "./components/homepage";
@@ -86,10 +86,20 @@ const AnimatedRoutes = () => {
   );
 };
 
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+};
+
 // Main App Component - now inside the router context
 const App = () => {
   return (
-    <div className="min-h-screen bg-gray-100 century-gothic">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 century-gothic">
       <style jsx>{`
         @font-face {
           font-family: "Gravesend Sans";
@@ -339,6 +349,7 @@ const App = () => {
           scroll-behavior: smooth;
         }
       `}</style>
+      <ScrollToTop />
       <Navigation />
       <AnimatedRoutes />
       <Footer />
