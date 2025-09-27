@@ -428,7 +428,7 @@ const HomePage = () => {
               >
                 Zimbabwe's premier comedy content creator with a unique philosophy 
                 that transforms brand messaging into viral entertainment. 
-                Over 90K followers trust my authentic voice.
+                Over 1M+ followers trust my authentic voice.
               </motion.p>
 
               <motion.div
