@@ -80,8 +80,8 @@ const Footer = () => {
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           <div className="sm:col-span-2 lg:col-span-1">
             <div className="flex items-center space-x-3 mb-4 sm:mb-6">
-              <div className="w-10 h-10 rounded-2xl bg-gradient-to-r from-orange-400 to-amber-500 flex items-center justify-center shadow-lg flex-shrink-0">
-                <span className="text-white font-bold">MV</span>
+              <div className="w-20 h-10 rounded-2xl flex items-center justify-center shadow-lg flex-shrink-0">
+                                    <img src="/logo4.png" alt="Mama Vee Logo" className="w-20 h-10 sm:w-20 sm:h-10" />
               </div>
               <div>
                 <span className="text-xl font-bold text-white">Mama Vee</span>

@@ -117,10 +117,10 @@ const Navigation = () => {
                 className="flex items-center space-x-2 sm:space-x-3 group min-w-0 flex-shrink-0"
               >
                 <div className="relative flex-shrink-0">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-gradient-to-r from-orange-400 to-amber-500 flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform duration-300">
-                    <span className="text-white font-bold text-lg sm:text-xl">MV</span>
+                  <div className="w-20 h-10 sm:w-20 sm:h-12  flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                    <img src="/logo4.png" alt="Mama Vee Logo" className="w-20 h-10 sm:w-20 sm:h-10" />
                   </div>
-                  <div className="absolute inset-0 w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-gradient-to-r from-orange-400 to-amber-500 opacity-50 blur-xl group-hover:blur-2xl transition-all duration-300"></div>
+                  <div className="absolute inset-0 w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
                 </div>
                 <div className="hidden xs:block min-w-0">
                   <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-white to-orange-200 bg-clip-text text-transparent truncate block">

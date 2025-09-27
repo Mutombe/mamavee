@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
@@ -54,12 +54,194 @@ const colors = {
   }
 };
 
+// Enhanced Particle Field Component
+const ParticleField = ({ intensity = 70 }) => {
+  const canvasRef = useRef(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    let animationFrameId;
+    let particles = [];
+    let mouse = { x: 0, y: 0 };
+
+    const resizeCanvas = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+
+    // Mouse interaction
+    const handleMouseMove = (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    };
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 1;
+        this.baseSize = this.size;
+        this.speedX = Math.random() * 2 - 1;
+        this.speedY = Math.random() * 2 - 1;
+        this.baseSpeedX = this.speedX;
+        this.baseSpeedY = this.speedY;
+        
+        // Color variations matching the design theme
+        const colorType = Math.random();
+        if (colorType < 0.4) {
+          // Orange to amber particles
+          this.hue = Math.random() * 40 + 25; // Orange range
+          this.saturation = Math.random() * 30 + 70;
+          this.lightness = Math.random() * 20 + 50;
+        } else if (colorType < 0.7) {
+          // Teal to cyan particles
+          this.hue = Math.random() * 40 + 180; // Teal/cyan range
+          this.saturation = Math.random() * 30 + 60;
+          this.lightness = Math.random() * 25 + 45;
+        } else {
+          // White/silver accent particles
+          this.hue = Math.random() * 60 + 200;
+          this.saturation = Math.random() * 20 + 10;
+          this.lightness = Math.random() * 30 + 70;
+        }
+        
+        this.alpha = Math.random() * 0.6 + 0.2;
+        this.baseAlpha = this.alpha;
+        
+        // Sparkle effect properties
+        this.sparklePhase = Math.random() * Math.PI * 2;
+        this.sparkleSpeed = Math.random() * 0.02 + 0.01;
+      }
+
+      update() {
+        // Mouse interaction effect
+        const dx = mouse.x - this.x;
+        const dy = mouse.y - this.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        const maxDistance = 100;
+
+        if (distance < maxDistance) {
+          const force = (maxDistance - distance) / maxDistance;
+          this.speedX = this.baseSpeedX + (dx / distance) * force * 2;
+          this.speedY = this.baseSpeedY + (dy / distance) * force * 2;
+          this.size = this.baseSize + force * 2;
+          this.alpha = this.baseAlpha + force * 0.3;
+        } else {
+          this.speedX += (this.baseSpeedX - this.speedX) * 0.1;
+          this.speedY += (this.baseSpeedY - this.speedY) * 0.1;
+          this.size += (this.baseSize - this.size) * 0.1;
+          this.alpha += (this.baseAlpha - this.alpha) * 0.1;
+        }
+
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        // Boundary wrapping
+        if (this.x > canvas.width + 50) this.x = -50;
+        if (this.x < -50) this.x = canvas.width + 50;
+        if (this.y > canvas.height + 50) this.y = -50;
+        if (this.y < -50) this.y = canvas.height + 50;
+
+        // Sparkle animation
+        this.sparklePhase += this.sparkleSpeed;
+      }
+
+      draw() {
+        const sparkle = Math.sin(this.sparklePhase) * 0.3 + 0.7;
+        const currentAlpha = this.alpha * sparkle;
+        
+        // Main particle
+        ctx.save();
+        ctx.globalAlpha = currentAlpha;
+        ctx.fillStyle = `hsl(${this.hue}, ${this.saturation}%, ${this.lightness}%)`;
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = `hsl(${this.hue}, ${this.saturation}%, ${this.lightness}%)`;
+        
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // Glow effect
+        ctx.globalAlpha = currentAlpha * 0.3;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size * 2, 0, Math.PI * 2);
+        ctx.fill();
+        
+        ctx.restore();
+      }
+    }
+
+    const connectParticles = () => {
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          
+          if (distance < 100) {
+            const opacity = (100 - distance) / 100 * 0.1;
+            ctx.save();
+            ctx.globalAlpha = opacity;
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+            ctx.restore();
+          }
+        }
+      }
+    };
+
+    const init = () => {
+      particles = [];
+      for (let i = 0; i < intensity; i++) {
+        particles.push(new Particle());
+      }
+    };
+
+    const animate = () => {
+      // Clear canvas with slight trail effect
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.02)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      particles.forEach(particle => {
+        particle.update();
+        particle.draw();
+      });
+
+      connectParticles();
+      animationFrameId = requestAnimationFrame(animate);
+    };
+
+    resizeCanvas();
+    init();
+    animate();
+
+    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener('mousemove', handleMouseMove);
+
+    return () => {
+      window.removeEventListener('resize', resizeCanvas);
+      window.removeEventListener('mousemove', handleMouseMove);
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, [intensity]);
+
+  return <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none" style={{ zIndex: 1 }} />;
+};
+
 const FloatingElements = () => {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {/* Enhanced Particle Field */}
+      <ParticleField intensity={120} />
+      
       {/* Animated blobs */}
       <motion.div
-        className="absolute top-10 right-10 w-32 h-32 bg-gradient-to-r from-orange-400/20 to-amber-400/20 rounded-full blur-3xl"
+        className="absolute top-10 right-10 w-32 h-32 bg-gradient-to-r from-orange-400/15 to-amber-400/15 rounded-full blur-3xl"
         animate={{
           x: [0, 50, 0],
           y: [0, -30, 0],
@@ -70,9 +252,10 @@ const FloatingElements = () => {
           repeat: Infinity,
           ease: "easeInOut"
         }}
+        style={{ zIndex: 2 }}
       />
       <motion.div
-        className="absolute bottom-20 left-10 w-24 h-24 bg-gradient-to-r from-teal-400/20 to-cyan-400/20 rounded-full blur-2xl"
+        className="absolute bottom-20 left-10 w-24 h-24 bg-gradient-to-r from-teal-400/15 to-cyan-400/15 rounded-full blur-2xl"
         animate={{
           x: [0, -40, 0],
           y: [0, 40, 0],
@@ -84,9 +267,10 @@ const FloatingElements = () => {
           ease: "easeInOut",
           delay: 1
         }}
+        style={{ zIndex: 2 }}
       />
       <motion.div
-        className="absolute top-1/3 left-1/4 w-16 h-16 bg-gradient-to-r from-purple-400/20 to-pink-400/20 rounded-full blur-2xl"
+        className="absolute top-1/3 left-1/4 w-16 h-16 bg-gradient-to-r from-amber-400/15 to-orange-400/15 rounded-full blur-2xl"
         animate={{
           rotate: [0, 360],
           scale: [1, 1.5, 1],
@@ -96,6 +280,7 @@ const FloatingElements = () => {
           repeat: Infinity,
           ease: "linear"
         }}
+        style={{ zIndex: 2 }}
       />
     </div>
   );
@@ -186,8 +371,7 @@ const HomePage = () => {
       </div>
 
       {/* Hero Section with Curved Design */}
-      <section className="relative min-h-screen flex items-center pt-30">
-        <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 via-transparent to-teal-500/10"></div>
+      <section className="relative min-h-screen flex items-center pt-26">
         
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -308,7 +492,7 @@ const HomePage = () => {
                 <div className="space-y-4">
                   <div className="flex items-center justify-center space-x-4">
                     <div className="text-center">
-                      <div className="text-2xl font-bold text-white">90K+</div>
+                      <div className="text-2xl font-bold text-white">1M+</div>
                       <div className="text-sm text-gray-300">Followers</div>
                     </div>
                     <div className="w-px h-8 bg-white/20"></div>
@@ -391,8 +575,7 @@ const HomePage = () => {
       </section>
 
       {/* Philosophy Section with Dynamic Layout */}
-      <section className="relative py-32 bg-gradient-to-br from-slate-800 to-slate-900">
-        <FloatingElements />
+      <section className="relative inset-0 py-32 bg-gradient-to-br from-slate-800 to-slate-900">
         
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
